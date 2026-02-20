@@ -6,7 +6,7 @@ import {
   Calendar, UserPlus, CheckSquare, Flame, X
 } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
-import useNotificationStore from '../../store/useNotificationStore'
+import useNotificationStore from '../../store/usenotificationstore'
 import useAuthStore from '../../store/useAuthStore'
 
 const TYPE_META = {

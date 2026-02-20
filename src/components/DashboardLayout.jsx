@@ -6,7 +6,8 @@ import Sidebar from './Sidebar'
 import BottomNav from './BottomNav'
 import { ConfirmDialog, useToast } from './ui'
 import useAuthStore from '../store/useAuthStore'
-import useNotificationStore from '../store/Usenotificationstore'
+import useNotificationStore from '../store/usenotificationstore'
+import AIAssistant from './AIAssistant'
 
 function MobileTopBar({ onMenuOpen }) {
   const navigate     = useNavigate()
@@ -41,7 +42,7 @@ function MobileTopBar({ onMenuOpen }) {
         {/* Logo */}
         <span className="font-bold text-white text-base"
           style={{ fontFamily: 'Syne, sans-serif' }}>
-          PlanPilot
+          Taskly
         </span>
 
         {/* Right actions */}
@@ -148,6 +149,9 @@ export default function DashboardLayout({ children }) {
 
       {/* Mobile bottom nav */}
       <BottomNav />
+
+      {/* AI Assistant — visible on all pages */}
+      <AIAssistant />
     </div>
   )
 }

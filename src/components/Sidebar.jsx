@@ -9,7 +9,7 @@ import {
 import { Avatar, Tooltip, ConfirmDialog, useToast } from './ui'
 import useAuthStore from '../store/useAuthStore'
 import useWorkspaceStore from '../store/useWorkspaceStore'
-import useNotificationStore from '../store/Usenotificationstore'
+import useNotificationStore from '../store/usenotificationstore'
 import NotificationPanel from '../components/notifications/NotificationPanel'
 import { fromUnixTime } from 'date-fns'
 
