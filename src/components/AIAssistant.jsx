@@ -107,7 +107,7 @@ export default function AIAssistant() {
       t.due_date && new Date(t.due_date) < new Date() && t.status !== 'done'
     )
 
-    return `You are an AI productivity assistant inside Taskly, a task management app.
+    return `You are an AI productivity assistant inside PlanPilot, a task management app.
 Today is ${today}.
 
 USER'S TASKS (pending):
@@ -139,19 +139,24 @@ INSTRUCTIONS:
     setLoading(true)
 
     try {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_GROQ_API_KEY}`,
+        },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
+          model: 'llama-3.3-70b-versatile',
           max_tokens: 1000,
-          system: buildContext(),
-          messages: newMessages.map(m => ({ role: m.role, content: m.content })),
+          messages: [
+            { role: 'system', content: buildContext() },
+            ...newMessages.map(m => ({ role: m.role, content: m.content })),
+          ],
         }),
       })
 
       const data = await response.json()
-      const reply = data.content?.[0]?.text || 'Sorry, I couldn\'t generate a response.'
+      const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response."
 
       setMessages(prev => [...prev, { role: 'assistant', content: reply }])
     } catch (err) {

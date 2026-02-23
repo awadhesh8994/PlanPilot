@@ -42,7 +42,7 @@ function MobileTopBar({ onMenuOpen }) {
         {/* Logo */}
         <span className="font-bold text-white text-base"
           style={{ fontFamily: 'Syne, sans-serif' }}>
-          Taskly
+          PlanPilot
         </span>
 
         {/* Right actions */}
