@@ -4,20 +4,19 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   LayoutDashboard, CheckSquare, Target, Timer,
   Settings, LogOut, Plus, ChevronDown,
-  Sparkles, Users, Briefcase
+  Sparkles, Users, Briefcase, BarChart2, Bot
 } from 'lucide-react'
 import { Avatar, Tooltip, ConfirmDialog, useToast } from './ui'
 import useAuthStore from '../store/useAuthStore'
 import useWorkspaceStore from '../store/useWorkspaceStore'
-import useNotificationStore from '../store/usenotificationstore'
-import NotificationPanel from '../components/notifications/NotificationPanel'
-import { fromUnixTime } from 'date-fns'
 
 const navItems = [
-  { icon: LayoutDashboard, label: 'Dashboard', to: '/dashboard' },
-  { icon: CheckSquare,     label: 'My Tasks',  to: '/tasks' },
-  { icon: Target,          label: 'Habits',    to: '/habits' },
-  { icon: Timer,           label: 'Pomodoro',  to: '/pomodoro' },
+  { icon: LayoutDashboard, label: 'Dashboard',    to: '/dashboard' },
+  { icon: CheckSquare,     label: 'My Tasks',     to: '/tasks' },
+  { icon: Target,          label: 'Habits',       to: '/habits' },
+  { icon: Timer,           label: 'Pomodoro',     to: '/pomodoro' },
+  { icon: BarChart2,       label: 'Analytics',    to: '/analytics' },
+  { icon: Bot,             label: 'AI Assistant', to: '/ai' },
 ]
 
 function NavItem({ icon: Icon, label, to }) {
@@ -115,17 +114,8 @@ export default function Sidebar() {
   const profile      = useAuthStore(s => s.profile)
   const user         = useAuthStore(s => s.user)
   const signOut      = useAuthStore(s => s.signOut)
-  const checkDue     = useNotificationStore(s => s.checkDueTaskReminders)
-  const checkStreaks  = useNotificationStore(s => s.checkHabitStreaks)
   const [showLogout, setShowLogout] = useState(false)
   const [loggingOut, setLoggingOut] = useState(false)
-
-  // Run notification checks once on mount
-  useEffect(() => {
-    if (!user) return
-    checkDue(user.id)
-    checkStreaks(user.id)
-  }, [user])
 
   const handleLogout = async () => {
     setLoggingOut(true)
@@ -145,7 +135,8 @@ export default function Sidebar() {
             <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center shadow-lg shadow-violet-900/50">
               <Sparkles size={15} className="text-white" />
             </div>
-            <span className="font-bold text-white text-lg tracking-tight" style={{ fontFamily: 'Syne, sans-serif' }}>
+            <span className="font-bold text-white text-lg tracking-tight"
+              style={{ fontFamily: 'Syne, sans-serif' }}>
               PlanPilot
             </span>
           </div>
@@ -179,15 +170,8 @@ export default function Sidebar() {
           </div>
         </nav>
 
-        {/* Bottom — notifications + user */}
+        {/* Bottom — user */}
         <div className="px-3 py-3 border-t border-white/[0.06] flex flex-col gap-1">
-
-          {/* Notification bell row */}
-          <div className="flex items-center gap-2 px-3 py-2">
-            <NotificationPanel />
-            <span className="text-sm text-slate-400">Notifications</span>
-          </div>
-
           <NavLink to="/settings"
             className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-slate-400
               hover:text-white hover:bg-white/5 transition-all border border-transparent"
@@ -195,7 +179,8 @@ export default function Sidebar() {
             <Settings size={16} /> Settings
           </NavLink>
 
-          <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] mt-1">
+          <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl
+            bg-white/[0.02] border border-white/[0.06] mt-1">
             <Avatar name={profile?.full_name || 'User'} src={profile?.avatar_url} size="sm" />
             <div className="flex-1 min-w-0">
               <p className="text-xs font-medium text-white truncate">{profile?.full_name || 'User'}</p>
