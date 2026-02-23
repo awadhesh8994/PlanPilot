@@ -13,7 +13,7 @@ import PomodoroPage from './pages/Pomodoro'
 import SettingsPage from './pages/Settings'
 import Landing from './pages/Landing'
 import Workspaces from './pages/Workspaces'
-
+import AIChat from './pages/AIChat'
 
 function PrivateRoute({ children }) {
   const user = useAuthStore((s) => s.user)
@@ -69,6 +69,7 @@ function App() {
         <Route path="/pomodoro" element={<P><PomodoroPage /></P>} />
         <Route path="/settings" element={<P><SettingsPage /></P>} />
         <Route path="/workspaces" element={<P><Workspaces /></P>} />
+        <Route path="/ai" element={<P><AIChat /></P>} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>

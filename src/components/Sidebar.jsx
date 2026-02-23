@@ -15,7 +15,6 @@ const navItems = [
   { icon: CheckSquare,     label: 'My Tasks',     to: '/tasks' },
   { icon: Target,          label: 'Habits',       to: '/habits' },
   { icon: Timer,           label: 'Pomodoro',     to: '/pomodoro' },
-  { icon: BarChart2,       label: 'Analytics',    to: '/analytics' },
   { icon: Bot,             label: 'AI Assistant', to: '/ai' },
 ]
 

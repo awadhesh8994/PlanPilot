@@ -1,13 +1,14 @@
 import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { LayoutDashboard, CheckSquare, Target, Timer, Users } from 'lucide-react'
+import { LayoutDashboard, CheckSquare, Target, Bot, BarChart2, Timer } from 'lucide-react'
 
 const navItems = [
   { icon: LayoutDashboard, label: 'Home',     to: '/dashboard' },
   { icon: CheckSquare,     label: 'Tasks',    to: '/tasks' },
   { icon: Target,          label: 'Habits',   to: '/habits' },
   { icon: Timer,           label: 'Pomodoro', to: '/pomodoro' },
-  { icon: Users,           label: 'Spaces',   to: '/workspaces' },
+
+  { icon: Bot,           label: 'AI',         to: '/ai' },
 ]
 
 export default function BottomNav() {
